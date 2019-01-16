@@ -1,0 +1,33 @@
+public class Solution {
+    public int black(ArrayList<String> a){
+        int row = a.size();
+        int col = a.get(0).length();
+        boolean visited[][] = new boolean[row][col];
+        int count = 0;
+        for(int i = 0 ; i < row ; i++)
+        {
+             for(int j = 0 ; j < col ; j++)
+             {
+                  if(a.get(i).charAt(j) == 'X' && visited[i][j] == false)
+                  {
+                      findSize(A , visited , i, j , row , col);
+                      count++;
+                  }
+             }
+        }
+        return count;
+    }
+    private void findSize(ArrayList<String> a , boolean visited[][] , int i , int j , int row , int col){
+        int direction[][] = {{-1 , 0} , {0 , 1} , {1 , 0} , {0 , -1}};
+        visited[i][j] = true;
+        for(int k = 0 ; k < 4 ; k++)
+        {
+             int newi = i + direction[k][0];
+             int newj = j + direction[k][1];
+             while(newi >= 0 && newi < r && newj >= 0 && newj < c && a.get(newi).charAt(newj) == 'X' && visited[newi][newj] == false)
+             {
+                  findSize(a , visited , newi , newj , row , col);
+             }
+        }
+    }
+}

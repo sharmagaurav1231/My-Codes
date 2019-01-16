@@ -1,0 +1,57 @@
+public class solution {
+     public void solve(ArrayList<ArrayList<Character>> a)
+     {
+          int r = a.size();
+          int c = a.get(0).size();
+          for(int i = 0 ; < r ; i++)
+          {
+              if(a.get(i).get(0) == 'O')
+                 find(a , i , 0 , r , c);
+          }
+          for(int i = 0 ; i < r ; i++)
+          {
+              if(a.get(i).get(c-1) == 'O')
+                 find(a , i , c-1 , r , c);
+          }
+          for(int i = 0 ; i < c ; i++)
+          {
+              if(a.get(0).get(i) == 'O')
+                 find(a , 0 , i , r , c);
+          }
+          for(int i = 0 ; i < c ; i++)
+          {
+              if(a.get(r-1).get(i) == 'O')
+                 find(a , r-1 , i , r , c);
+          }
+          for(int i = 0 ; i < r ; i++)
+          {
+              for(int j = 0 ; j < c ; j++)
+              {
+                   if(a.get(i).get(j) == 'O')
+                        a.get(i).set(j , 'X');
+              }
+          }
+          for(int i = 0 ; i < r ; i++)
+          {
+              for(int j = 0 ; j < c ; j++)
+              {
+                   if(a.get(i).get(j) == 'U')
+                        a.get(i).set(j , 'O');
+              }
+          }
+     }
+     private void find(ArrayList<ArrayList<Character>> a , int i , int x , int r , int c)
+     {
+          int dir[][] = { {-1 , 0} , {0 , 1} , {1 , 0} , {0 , -1} };
+          a.get(i).set(x , 'U');
+          for(int k = 0 ; k < 4 ; k++)
+          {
+              int newi = i + dir[k][0];
+              int newx = x + dir[k][1];
+              while(newi >= 0 && newi < r && newx >=0 && newx < c && a.get(newi).get(newx) == 'O')
+              {
+                   find(a , newi , newx , r , c);
+              }
+          }
+     }
+}

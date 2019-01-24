@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct tree
+{
+	int data;
+	struct tree* left;
+	struct tree* right;
+};
+struct tree* newnode(int data)
+{
+	struct tree* nn=(struct tree*)malloc(sizeof(struct tree));
+	nn->data=data;
+	nn->left=NULL;
+	nn->right=NULL;
+	return nn;
+}
+int search(int* arr,int begin,int end,int d)
+{
+	int i;
+	for(i=begin;i<end;i++)
+	{
+		if(arr[i]==d)
+		  return i;
+	}
+}
+struct tree* buildTree(int* in,int* post,int strt,int end,int* mind)
+{	
+	if(strt>end)
+	   return NULL;
+	
+	struct tree* nn=newnode(post[*mind]);
+	(*mind)--;
+	
+	if(strt==end)
+	  return nn;
+	
+	int ind=search(in,strt,end,nn->data);
+	
+	nn->left=buildTree(in,post,strt,ind-1,mind);
+	nn->right=buildTree(in,post,ind+1,end,mind);
+	
+	return nn;
+}
+void preorder(struct tree* root)
+{
+	if(root!=NULL)
+	{
+		printf("%d ",root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+void inorder(struct tree* root)
+{
+	if(root!=NULL)
+    {
+    	inorder(root->left);        
+    	printf("%d",root->data);
+    	inorder(root->right);
+	}
+}
+struct tree* build(int* in,int* post,int n)
+{
+	int mind=n-1;
+	struct tree* root=buildTree(in,post,0,n-1,&mind);
+	return root;
+}
+main()
+{
+	struct tree* root=NULL;
+	int in[]={4, 8, 2, 5, 1, 6, 3, 7 };
+	int post[]={8, 4, 5, 2, 6, 7, 3, 1};
+	root=build(in,post,8);
+	preorder(root);
+	printf("\n");
+	inorder(root);
+}

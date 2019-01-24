@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+int search(int*,int,int,int);
+struct tree
+{
+	int data;
+	struct tree* left;
+	struct tree* right;
+};
+struct tree* newnode(int data)
+{
+	struct tree* nn=(struct tree*)malloc(sizeof(struct tree));
+	nn->data=data;
+	nn->left=NULL;
+	nn->right=NULL;
+	return nn;
+}
+struct tree* buildTree(int* in,int* pre,int strt,int end)
+{
+	static int index=0;
+	
+	if(strt>end)
+	  return NULL;
+	
+	struct tree* node=newnode(pre[index++]);
+	
+	if(strt==end)
+	  return node;
+	  
+	int ind=search(in,strt,end,node->data);
+    
+    node->left=buildTree(in,pre,strt,ind-1);
+    node->right=buildTree(in,pre,ind+1,end);
+    
+    return node;
+}
+int search(int * a,int begin,int end,int d)
+{
+	for(int i=begin;i<=end;i++)
+	{
+		if(a[i]==d)
+		  return i;
+	}
+}
+void inorder(struct tree* root)
+{
+	if(root!=NULL)
+	 {
+	 	inorder(root->left);
+	 	printf("%d ",root->data);
+	 	inorder(root->right);
+	 }
+	 else
+	   return;
+}
+void preorder(struct tree* root)
+{
+	if(root!=NULL)
+	{
+		printf("%d ",root->data);
+		preorder(root->left);
+		preorder(root->right);
+	}
+}
+
+main()
+{
+	int in[] = {3,2,4,1,5}; 
+    int pre[] = {1,2,3,4,5};
+    struct tree* node=buildTree(in,pre,0,4);
+    inorder(node);
+    printf("\n");
+    preorder(node);
+}

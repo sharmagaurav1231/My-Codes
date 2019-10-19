@@ -1,0 +1,11 @@
+openshift-operator-lifecycle-manager
+Service Account:
+olm-operator-serviceaccount
+ClusterRole:
+system:controller:operator-lifecycle-manager
+ClusterRoleBinding:
+olm-operator-binding-openshift-operator-lifecycle-manager
+CatalogSource:
+rh-operators
+ConfigMap:
+rh-operators

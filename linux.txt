@@ -1,0 +1,5 @@
+Linux is a Unix-Like operating system. All the Linux/Unix commands are run in the terminal provided by the Linux system.
+This terminal is just like command prompt of Windows OS. Linux/Unix commands are case-sensitive. 
+The terminal can be used to accomplish all Administrative tasks. This includes package installation, 
+file manipulation, and user management. Linux terminal is user-interactive. The terminal outputs the results of commands which are specified by the user itself. 
+Execution of typed command is done only after you press the Enter key.

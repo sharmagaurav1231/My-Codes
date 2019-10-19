@@ -1,0 +1,5 @@
+<input type="submit"> defines a button for submitting the form data to a form-handler.
+
+The form-handler is typically a server page with a script for processing input data.
+
+The form-handler is specified in the form's action attribute:
